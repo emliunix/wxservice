@@ -1,7 +1,6 @@
 (defproject wxservice "0.1.0-SNAPSHOT"
   :description "Weixin Service"
   :source-paths ["src"]
-  :java-source-paths ["wxsdk"]
   :test-paths ["test"]
   :resource-paths ["resources"]
   :dependencies [[org.clojure/clojure "1.8.0"]
