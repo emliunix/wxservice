@@ -1,0 +1,2 @@
+# 移除token和aeskey的配置文件
+/config.properties
