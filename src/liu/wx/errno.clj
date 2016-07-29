@@ -1,6 +1,5 @@
 (ns liu.wx.errno)
-(def errno {
-            :wx-ok = 0
+(def errno {:wx-ok 0
             :wx-sign-err -40001
             :wx-xml-parse-err -40002
             :wx-sign-gen-err -40003
@@ -12,4 +11,3 @@
             :wx-base64-enc-err -40009
             :wx-base64-dec-err -40010
             :wx-xml-gen-err -40011 })
-

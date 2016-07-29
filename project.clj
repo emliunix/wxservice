@@ -15,12 +15,10 @@
                  [ring/ring-devel "1.5.0"]
                  [ring/ring-servlet "1.5.0"]
                  [ring/ring-jetty-adapter "1.5.0"]
-                 [compojure "1.5.1"]
-                 ;; used by wxsdk
+                 ;; used for encryption, decryption, hash, etc
                  [commons-codec/commons-codec "1.10"]
-                 [junit/junit "4.12"]]
   :plugins [[lein-ring "0.9.7"]]
-  :ring {:handler liu.wx.core/handler}
+  :ring {:handler liu.wx.core/app}
   :main ^:skip-aot liu.wx.core
   :profiles {:uberjar {:aot :all}}
   :javac-options ["-encoding" "utf-8"])
