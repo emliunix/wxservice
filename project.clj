@@ -16,7 +16,7 @@
                  [ring/ring-servlet "1.5.0"]
                  [ring/ring-jetty-adapter "1.5.0"]
                  ;; used for encryption, decryption, hash, etc
-                 [commons-codec/commons-codec "1.10"]
+                 [commons-codec/commons-codec "1.10"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler liu.wx.core/app}
   :main ^:skip-aot liu.wx.core
