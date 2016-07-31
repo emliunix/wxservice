@@ -1,5 +1,6 @@
 (ns liu.wx.util
-  (:require [clojure.tools.logging :as log]))
+  (:require [clojure.tools.logging :as log]
+            [clojure.data.xml :as xml]))
 
 (defn hexstr [data-bytes]
   (apply str 
@@ -23,6 +24,10 @@
 
 (defn curr-timestamp []
   (str (quot (System/currentTimeMillis) 1000)))
+
+(defn gen-nonce []
+  (apply str
+         (repeatedly 16 #(Integer/toString (rand-int 16) 16))))
 
 ;; parameter checker and extractor
 
@@ -63,3 +68,38 @@
        msgs))
    []
    spec))
+
+;; 对于微信这种没有attribute的xml封装两个函数
+
+(defn- xml-els-to-map [els]
+  (if (every? string? els)
+    ;; 当 子元素 都是字符串的时候，返回一个字符串或者一个字符串的vector
+    (if (= 1 (count els))
+      (first els)
+      els)
+    (reduce
+     (fn [acc el]
+       ;; 只处理 element 元素
+       (if (= clojure.data.xml.Element (type el))
+         (conj acc [(:tag el)
+                    (xml-els-to-map (:content el))])
+         acc))
+     {}
+     els)))
+
+(defn flat-xml [xml-str]
+  "Ignores all attributes. Make xml simple nested maps."
+  ;; *FIX* 当els既包含字符串又包含elemnt的时候，不知道怎么处理。
+  (let [els (:content (xml/parse-str xml-str))]
+    (xml-els-to-map els)))
+
+(defn- to-xml-sexp [els]
+  (map
+   (fn [[k v]]
+     [k {} (if (map? v) (to-xml-sexp v) [:-cdata v])])
+   els))
+
+(defn to-xml [els]
+  (xml/emit-str
+   (xml/sexp-as-element
+    [:xml {} (to-xml-sexp els)])))
