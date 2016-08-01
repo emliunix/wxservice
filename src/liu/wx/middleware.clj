@@ -122,9 +122,13 @@
 (defn- extract-aes-body [data aes-key appid]
   "takes a map with :encrypt, returns a merge or original map
    and the map decrypted from :encrypt."
-  (let [encrypt (:Encrypt data)]
-    (merge data
-           (flat-xml (decrypt aes-key appid encrypt)))))
+  (let [encrypt (:Encrypt data)
+        decrypted (decrypt aes-key appid encrypt)]
+    (if-not (nil? decrypted)
+      (merge data
+             (flat-xml decrypted))
+      (do (log/error "Failed to decrypt data => " data)
+          data))))
 
 (defn- encrypt-aes-body [body aes-key appid token]
   "encrypt body(string)"
