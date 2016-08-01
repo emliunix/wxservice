@@ -5,7 +5,9 @@
                                        wrap-wx
                                        wrap-post-data]]
             [liu.wx.config :refer [get-config]]
-            [liu.wx.handler :refer [wx-verifyurl-handler]])
+            [liu.wx.router :refer [router]]
+            [liu.wx.handler :refer [wx-verifyurl-handler
+                                    msg-text-handler]])
   (:import [java.io StringReader])
   (:gen-class))
 
@@ -22,7 +24,7 @@
 (def appid (get-config "APPID"))
 (def appsecret (get-config "APPSECRET"))
 
-(defn router [& routes]
+(defn dispatch [& routes]
   (let [routes (apply array-map routes)]
     (fn [req]
       ((routes (:request-method req)
@@ -31,10 +33,14 @@
                                   :body "No routes defined"})))
        req))))
 
+(def routes
+  {:text msg-text-handler
+   :invalid debug-handler})
+
 (def app
-  (-> (router
+  (-> (dispatch
        :get wx-verifyurl-handler
-       :default debug-handler)
+       :default (router routes))
       (wrap-wx
        :token token
        :aes-key aeskey

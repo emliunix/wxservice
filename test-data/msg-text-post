@@ -1,0 +1,18 @@
+POST /?signature=25586946600dfe01b9b0178e413a6533c5d67d31&timestamp=1469986299&nonce=214354632&encrypt_type=aes&msg_signature=e6a7143b40337dc089bca307f5e4e77dfad9f573 HTTP/1.0
+Host: www.emliunix.net
+Connection: close
+Content-Length: 578
+User-Agent: Mozilla/4.0
+Accept: */*
+Content-Type: text/xml
+Pragma: no-cache
+
+<xml>
+    <ToUserName><![CDATA[gh_5a410c98a66e]]></ToUserName>
+    <Encrypt><![CDATA[shRTPY+9aw6VPtKyz4XwmovDfJ94E9/aD+yGTRUsyzYezcksWZ5wwQQ6EHJg0aFOz7z0OsrqtNsyWR22DPFSYG1H8DGj++BIQSTEGsWlBAF4Nj77tU1q9x4ucpTJK0tvu4ztzx2w7aBhslcLssUy+/UQ0SkEfTYTLV/RhiI/S1pR0SpcZRjAsRy+hgqZJVaCT5hrL3W1ia9+AKjw1RT6kpOzYj0DzmQ0DaNXx9WXAop/ETFhSPBHyd0zQMblwtfIyRDTT9S7fDr0oAB3cRV/nVsaDrOFygdOU0f5/xyVU5V28lO2Bc4kFUw3hscrNUpezN8fwB2g9yDjIdt1Rv9ag6OpTBQl5DBFBwhAUQTfy9KtgdsPB3/RQUZJK6Dmeze9gqM5VLNdES5VrLYcPrUMfdZH9bi68H49pOw5WTNuHBi3vuPx1hisBHK/+HGk2kgd0p2ZO7VRuYzZP5g88/Dwfg==]]></Encrypt>
+</xml>
+
+curl 'localhost:3000/?signature=25586946600dfe01b9b0178e413a6533c5d67d31&timestamp=1469986299&nonce=214354632&encrypt_type=aes&msg_signature=e6a7143b40337dc089bca307f5e4e77dfad9f573' -d '<xml>
+    <ToUserName><![CDATA[gh_5a410c98a66e]]></ToUserName>
+    <Encrypt><![CDATA[shRTPY+9aw6VPtKyz4XwmovDfJ94E9/aD+yGTRUsyzYezcksWZ5wwQQ6EHJg0aFOz7z0OsrqtNsyWR22DPFSYG1H8DGj++BIQSTEGsWlBAF4Nj77tU1q9x4ucpTJK0tvu4ztzx2w7aBhslcLssUy+/UQ0SkEfTYTLV/RhiI/S1pR0SpcZRjAsRy+hgqZJVaCT5hrL3W1ia9+AKjw1RT6kpOzYj0DzmQ0DaNXx9WXAop/ETFhSPBHyd0zQMblwtfIyRDTT9S7fDr0oAB3cRV/nVsaDrOFygdOU0f5/xyVU5V28lO2Bc4kFUw3hscrNUpezN8fwB2g9yDjIdt1Rv9ag6OpTBQl5DBFBwhAUQTfy9KtgdsPB3/RQUZJK6Dmeze9gqM5VLNdES5VrLYcPrUMfdZH9bi68H49pOw5WTNuHBi3vuPx1hisBHK/+HGk2kgd0p2ZO7VRuYzZP5g88/Dwfg==]]></Encrypt>
+</xml>'

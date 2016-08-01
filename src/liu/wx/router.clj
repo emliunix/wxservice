@@ -26,5 +26,12 @@
 (defn router [handlers]
   (fn [req]
     (let [wx-data (:wx-data req)
-          event-type (get-msg-type wx-data)]
-      )))
+          event-type (get-msg-type wx-data)
+          handler (event-type handlers)
+          handler (if (nil? handler)
+                    (:default handlers)
+                    handler)]
+      (if-not (nil? handler)
+        (handler req)
+        {:status 400
+         :body (str "No handler found for event-type: " event-type)}))))

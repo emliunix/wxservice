@@ -14,3 +14,29 @@
     {:body echo :status 200}
     (do (log/error "Echostr parameter not present.")
         {:body "Echostr parameter not present." :status 400})))
+
+
+;; event handlers
+;; Messages
+;; * text
+;; * image
+;; * voice
+;; * video
+;; * shortvideo
+;; * location
+;; * link
+;; Events:
+;; * subscribe / unsubscribe
+;; * subscribe / SCAN 二维码场景扫描
+;; * LOCATION
+;; * CLICK
+;; * VIEW
+(defn msg-text-handler [req]
+  (let [wx-data (:wx-data req)
+        {touser :ToUserName
+         fromuser :FromUserName
+         ctime :CreateTime
+         msgid :MsgId
+         ctnt :Content} wx-data]
+    (log/infof "%s send [%s: %s] to %s at %s" fromuser touser msgid ctnt ctime)
+    {:body ctnt :status 200}))
